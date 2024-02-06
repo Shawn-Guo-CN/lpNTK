@@ -57,4 +57,4 @@ transform = """transforms.Compose([
 [wandb]
 project = "Transmission-Phase"
 experiment = "GradMatrix"
-entity = "joshua_shawn"
+entity = "" # you wandb entity
