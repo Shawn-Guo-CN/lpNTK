@@ -23,4 +23,4 @@ num_classes = 100
 [wandb]
 project = "Transmission-Phase"
 experiment = "Analyse-GradMatrix"
-entity = "joshua_shawn"
+entity = "" # your wandb entity
