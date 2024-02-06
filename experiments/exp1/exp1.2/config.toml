@@ -1,0 +1,26 @@
+[default]
+model = "LeNet"
+num_classes = 10
+
+
+[sweep]
+datasets = ['MNIST', 'CIFAR10', 'CIFAR100']
+
+
+[MNIST]
+
+
+[CIFAR10]
+model = "ResNet18"
+num_classes = 10
+
+
+[CIFAR100]
+model = "ResNet50"
+num_classes = 100
+
+
+[wandb]
+project = "Transmission-Phase"
+experiment = "Analyse-GradMatrix"
+entity = "joshua_shawn"

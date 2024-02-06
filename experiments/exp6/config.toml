@@ -1,0 +1,60 @@
+[default]
+use_cuda = true
+batch_size = 128
+
+model = "LeNet"
+num_classes = 10
+optim = "SGD"
+lr = 0.001
+momentum = 0.9
+gamma=0.7
+weight_decay = 5e-4
+
+# iterations for approximating forgetting events
+forget_iters = [] # log as you need
+
+
+[sweep]
+seeds = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+datasets = ['MNIST', 'CIFAR10', 'CIFAR100']
+
+
+[MNIST]
+transform = """transforms.Compose([
+    transforms.ToTensor(),
+    transforms.Normalize([0.1307,], [0.3081,])
+    ])"""
+
+
+[CIFAR10]
+model = "ResNet18"
+batch_size = 8
+lr = 5e-4
+transform = """transforms.Compose([
+    transforms.ToTensor(),
+    transforms.Normalize((0.4914, 0.4822, 0.4465), [0.2023, 0.1994, 0.2010])
+    ])"""
+
+log_epochs = [] # log as you need
+forget_iters = [] # log as you need
+
+
+
+[CIFAR100]
+model = "ResNet50"
+num_classes = 100
+batch_size = 4
+lr = 5e-4
+transform = """transforms.Compose([
+    transforms.ToTensor(),
+    transforms.Normalize((0.5071, 0.4867, 0.4408), (0.2675, 0.2565, 0.2761))
+    ])"""
+
+log_epochs = [] # log as you need
+forget_iters = [] # log as you need
+
+
+[wandb]
+project = "Transmission-Phase"
+experiment = "Forget-EL2N"
+entity = "" # your wandb entity

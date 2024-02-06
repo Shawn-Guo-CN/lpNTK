@@ -1,0 +1,40 @@
+[default]
+num_classes = 10
+num_samples = 10 # number of non-/interchangeable samples to add
+num_train = 100 # number of training runs
+
+use_cuda = true
+batch_size = 128
+seed = 1
+model = "LeNet"
+optim = "SGD"
+lr = 0.01
+momentum = 0.9
+gamma=0.7
+weight_decay = 5e-4
+epochs = 50
+
+
+[MNIST]
+lr = 0.01
+model = "LeNet"
+transform = """transforms.Compose([
+    transforms.ToTensor(),
+    transforms.Normalize([0.1307,], [0.3081,])
+    ])"""
+
+
+[CIFAR10]
+lr = 0.01
+num_samples = 50
+epochs = 200
+model = "ResNet18"
+transform = """transforms.Compose([
+    transforms.ToTensor(),
+    transforms.Normalize((0.5071, 0.4867, 0.4408), (0.2675, 0.2565, 0.2761))
+    ])"""
+
+
+[wandb]
+project = "Transmission-Phase"
+experiment = "LearnDiff_Control"

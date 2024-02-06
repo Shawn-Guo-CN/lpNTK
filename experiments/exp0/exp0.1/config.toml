@@ -1,0 +1,82 @@
+[default]
+use_cuda = true
+batch_size = 128
+test_batch_size = 1024
+seed = 1
+
+model = "LeNet"
+num_classes = 10
+optim = "SGD"
+lr = 0.1
+momentum = 0.9
+gamma=0.7
+weight_decay = 5e-4
+
+epochs = 30
+
+log_interval = 1 # epoch-based, this is also the test interval
+log_iterations = [] # log as you need
+log_epochs = [] # log as you need
+
+
+[sweep]
+seeds = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+datasets = ['MNIST', 'CIFAR10', 'CIFAR100']
+
+
+[MNIST]
+num_classes = 10
+transform = """transforms.Compose([
+    transforms.ToTensor(),
+    transforms.Normalize([0.1307,], [0.3081,])
+    ])"""
+test_transform = """transforms.Compose([
+    transforms.ToTensor(),
+    transforms.Normalize([0.1307,], [0.3081,])
+    ])"""
+
+[CIFAR10]
+model = "ResNet18"
+num_classes = 10
+batch_size = 128
+epochs = 200
+transform = """transforms.Compose([
+    transforms.ToTensor(),
+    transforms.RandomCrop(32, padding=4),
+    transforms.RandomHorizontalFlip(),
+    transforms.Normalize((0.4914, 0.4822, 0.4465), (0.2023, 0.1994, 0.2010))
+    ])"""
+test_transform = """transforms.Compose([
+    transforms.ToTensor(),
+    transforms.Normalize((0.4914, 0.4822, 0.4465), (0.2023, 0.1994, 0.2010)),
+    ])"""
+
+log_epochs = [] # input as you need
+log_iterations = [] # input as you need
+
+
+[CIFAR100]
+model = "ResNet50"
+num_classes = 100
+batch_size = 4
+epochs = 40
+lr = 5e-4
+transform = """transforms.Compose([
+    transforms.ToTensor(),
+    # transforms.RandomCrop(32, padding=4),
+    # transforms.RandomHorizontalFlip(),
+    transforms.Normalize((0.5071, 0.4867, 0.4408), (0.2675, 0.2565, 0.2761))
+    ])"""
+test_transform = """transforms.Compose([
+    transforms.ToTensor(),
+    transforms.Normalize((0.5071, 0.4867, 0.4408), (0.2675, 0.2565, 0.2761))
+    ])"""
+
+log_epochs = [] # input as you need
+log_iterations = [] # input as you need
+
+
+
+[wandb]
+project = "Transmission-Phase"
+experiment = "Pretrain"
